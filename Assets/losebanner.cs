@@ -23,12 +23,15 @@ public class losebanner : MonoBehaviour {
 		scale_height.y = height * scale_height.y / curr_height;
 
 		loseprefab.transform.localScale = new Vector3 (scale_width.x, scale_height.y, 1);
-		Vector3 pos = new Vector3(0,50,50);
+		Vector3 pos = new Vector3(0,0,0);
 		Instantiate(loseprefab, pos, Quaternion.identity);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		//Vector2 backpos = new Vector2 (width - 10, height - 10);
+
+		//backbutton.anchoredPosition = backpos;
 	}
+
 }
