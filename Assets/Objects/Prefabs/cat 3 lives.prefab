@@ -26,6 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 478186}
   - 114: {fileID: 11451506}
+  - 135: {fileID: 13545488}
   m_Layer: 0
   m_Name: cat 3 lives
   m_TagString: enemy
@@ -56,7 +57,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121460}
-  m_LocalRotation: {x: 0, y: .904062331, z: 0, w: .427400649}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
   m_LocalPosition: {x: -15.292654, y: 3.07566595, z: 43.2773895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -162,8 +163,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathParticles: {fileID: 124698, guid: 8edb940aec97af74ca67bf25fda808b4, type: 2}
+  attackParticlesL: {fileID: 154124, guid: fc2cc5871cc8f7f488024842b9044c84, type: 2}
+  attackParticlesR: {fileID: 105740, guid: f6e22e6a7a259e24a82017cda8494c4e, type: 2}
   health: 3
-  scriptA: {fileID: 0}
+  time_between_attacks: 3
+  num_of_attacks: 1
+--- !u!135 &13545488
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121460}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5.90927124
+  m_Center: {x: 0, y: 2, z: -3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
