@@ -16,14 +16,14 @@ public class losebanner : MonoBehaviour {
 		width = height * Camera.main.aspect;
 		float curr_width = loseprefab.GetComponent<Renderer> ().bounds.size.x;
 		float curr_height = loseprefab.GetComponent<Renderer>().bounds.size.y;
-		Vector3 scale_width = loseprefab.transform.localScale;
-		Vector3 scale_height = loseprefab.transform.localScale;
+		Vector3 scale = loseprefab.transform.localScale;
 
-		scale_width.x = width * scale_width.x / curr_width;
-		scale_height.y = height * scale_height.y / curr_height;
+		scale.x = width * scale.x / curr_width;
+		scale.y = height * scale.y / curr_height;
+	
+		loseprefab.transform.localScale += new Vector3(scale.x, scale.y,0);
 
-		loseprefab.transform.localScale = new Vector3 (scale_width.x, scale_height.y, 1);
-		Vector3 pos = new Vector3(0,0,0);
+		Vector3 pos = new Vector3(0,0,400);
 		Instantiate(loseprefab, pos, Quaternion.identity);
 	}
 	
