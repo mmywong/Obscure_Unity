@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 	private float width;
 	private float height;
 	private int num_of_cats = 1;
-	public int playerHP = 5;
+	public float playerHP = 10;
 	public GameObject losebanner;
 
 	//input
@@ -129,5 +129,9 @@ public class GameManager : MonoBehaviour {
 		if (playerHP <= 0) {
 			Application.LoadLevel("LoseScene");
 		}
+	}
+
+	public float getPlayerHP(){
+		return playerHP;
 	}
 }
