@@ -223,8 +223,8 @@ Canvas:
   m_GameObject: {fileID: 258087248}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 924662906}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time_between_spawns: 2
-  prefab: {fileID: 400000, guid: f13bb1bc149f63943a9d0e8bb2fee7ab, type: 3}
+  prefab: {fileID: 478186, guid: 3420367c56b99d64ba1dada1b31d62c0, type: 2}
   playerHP: 5
   losebanner: {fileID: 151834, guid: 82f82148cfe42484882a47023368ba8d, type: 2}
   touchInputMask:
