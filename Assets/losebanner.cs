@@ -23,7 +23,7 @@ public class losebanner : MonoBehaviour {
 	
 		loseprefab.transform.localScale += new Vector3(scale.x, scale.y,0);
 
-		Vector3 pos = new Vector3(0,0,102);
+		Vector3 pos = new Vector3(0,0,120);
 		Instantiate(loseprefab, pos, Quaternion.identity);
 	}
 	

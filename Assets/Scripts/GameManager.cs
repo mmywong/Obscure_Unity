@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 	//public int playerMaxHP;
 	//public int playerCurrentHP;
 	//private static gamestate instance;
-	public float time_between_spawns;
+	private float time_between_spawns;
 	private float time_since_start = 0f;
 	public Transform prefab;
 	private float width;
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 	private int num_of_cats = 1;
 	public float playerHP = 10;
 	public GameObject losebanner;
-
+	public Transform[] cat_list;
 	//input
 	public LayerMask touchInputMask;
 	private List<GameObject> touchList = new List<GameObject>();
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		height = 2.0f * Camera.main.orthographicSize;
 		width = height * Camera.main.aspect;
+		cat_list = Resources.LoadAll ("Prefabs") as Transform[];
 		//GameObject sceneCamObj = GameObject.Find ("SceneCamera");
 		//Debug.Log (sceneCamObj.camera.pixelRect);
 	}
@@ -37,18 +38,22 @@ public class GameManager : MonoBehaviour {
 		//=============Cat Spawner===============//
 		time_since_start += Time.deltaTime;
 		int timer = (int)Mathf.Ceil (time_since_start);
-		int max_cat_health = timer / 60;
-		int[] possible_cat_lives = {1,3,5,7,9};
-		print (possible_cat_lives [2]);
+		int index = timer/10;
+		float[] spawn_rates = {2.0f,1.6f,1.2f,0.8f,0.4f};
+		int max_num_of_cats = timer;
 
+		time_between_spawns = spawn_rates[index];
+
+		//if(timer % time_between_spawns == 0 && num_of_cats <= max_num_of_cats
 		if (timer % time_between_spawns == 0 && timer/time_between_spawns == num_of_cats) 
 		{
+			int random_index = Random.Range(1,index)-1;
 			Vector3 position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
 			while(Physics.CheckSphere(position, 6))
 			{
 				position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
 			}
-			Instantiate(prefab, position, prefab.rotation);
+			Instantiate(cat_list[0], position, cat_list[0].rotation);
 			num_of_cats= num_of_cats +1;
 		}
 		/*
