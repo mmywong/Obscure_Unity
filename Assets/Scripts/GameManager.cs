@@ -37,9 +37,12 @@ public class GameManager : MonoBehaviour {
 		//=============Cat Spawner===============//
 		time_since_start += Time.deltaTime;
 		int timer = (int)Mathf.Ceil (time_since_start);
+		int max_cat_health = timer / 60;
+		int[] possible_cat_lives = {1,3,5,7,9};
+		print (possible_cat_lives [2]);
+
 		if (timer % time_between_spawns == 0 && timer/time_between_spawns == num_of_cats) 
 		{
-			
 			Vector3 position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
 			while(Physics.CheckSphere(position, 6))
 			{
