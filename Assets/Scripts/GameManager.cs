@@ -8,13 +8,16 @@ public class GameManager : MonoBehaviour {
 	//private static gamestate instance;
 	private float time_between_spawns;
 	private float time_since_start = 0f;
-	public Transform prefab;
+	public Transform prefab1;
+	public Transform prefab2;
+	public Transform prefab3;
+	public Transform prefab4;
+	public Transform prefab5;
 	private float width;
 	private float height;
 	private int num_of_cats = 1;
 	public float playerHP = 10;
 	public GameObject losebanner;
-	public Transform[] cat_list;
 	//input
 	public LayerMask touchInputMask;
 	private List<GameObject> touchList = new List<GameObject>();
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		height = 2.0f * Camera.main.orthographicSize;
 		width = height * Camera.main.aspect;
-		cat_list = Resources.LoadAll ("Prefabs") as Transform[];
+
 		//GameObject sceneCamObj = GameObject.Find ("SceneCamera");
 		//Debug.Log (sceneCamObj.camera.pixelRect);
 	}
@@ -41,8 +44,8 @@ public class GameManager : MonoBehaviour {
 		int index = timer/10;
 		float[] spawn_rates = {2.0f,1.6f,1.2f,0.8f,0.4f};
 		int max_num_of_cats = timer;
-
-		time_between_spawns = spawn_rates[index];
+		Transform[] cat_list = {prefab1,prefab2,prefab3,prefab4,prefab5};
+		time_between_spawns = 2;
 
 		//if(timer % time_between_spawns == 0 && num_of_cats <= max_num_of_cats
 		if (timer % time_between_spawns == 0 && timer/time_between_spawns == num_of_cats) 
@@ -53,7 +56,7 @@ public class GameManager : MonoBehaviour {
 			{
 				position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
 			}
-			Instantiate(cat_list[0], position, cat_list[0].rotation);
+			Instantiate(cat_list[random_index], position, cat_list[random_index].rotation);
 			num_of_cats= num_of_cats +1;
 		}
 		/*
