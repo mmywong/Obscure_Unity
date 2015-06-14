@@ -23,9 +23,12 @@ public class GameManager : MonoBehaviour {
 	private List<GameObject> touchList = new List<GameObject>();
 	private GameObject[] touchesOld;
 	private RaycastHit hit;
-	private int i = 0;
 	private float temp_time = 0;
 	private bool cat_spawned = false;
+	//private int spawn_num = 0;
+	//private int spawn_rate = 2.0;
+	//private int index = 0;
+	private int random_index=0;
 
 	void Awake(){
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -45,31 +48,46 @@ public class GameManager : MonoBehaviour {
 		time_since_start += Time.deltaTime;
 		int timer = (int)Mathf.Floor (time_since_start);
 		float timer_dec = Mathf.Round (time_since_start * 10f) / 10f;
+		int index = timer / 10;
 
-		int index = timer/10;
-		if (index > 4) {
-			index = 4;
-		}
-		float[] spawn_rates = {2.0f,1.6f,1.2f,0.8f,0.4f};
-		int max_num_of_cats = timer;
+		//int[] spawn_rates = {5,4,3,2,1};
+
 		Transform[] cat_list = {prefab1,prefab2,prefab3,prefab4,prefab5};
-		time_between_spawns = 2;
+		time_between_spawns = 1;
 
-		//if(timer % time_between_spawns == 0 && num_of_cats <= max_num_of_cats
-		if (timer % time_between_spawns == 0 && timer/time_between_spawns == num_of_cats) 
+		if (temp_time != timer) 
 		{
-			int random_index = Random.Range(1,index)-1;
-			int random_index = Random.Range(0,index);
-			Vector3 position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
-			while(Physics.CheckSphere(position, 6))
-			{
-				position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
-			}
-			Instantiate(cat_list[random_index], position, cat_list[random_index].rotation);
-			num_of_cats= num_of_cats +1;
+			temp_time = timer;
+			cat_spawned = false;
+		}
+
+		//if (time_between_spawns*num_of_cats <(index+1)*10 && num_of_cats < max_num_of_cats)//Mathf.Repeat(time_since_start, time_between_spawns) == 0)
+		//if(timer_dec%time_between_spawns == 0 && timer_dec/time_between_spawns == num_of_cats)//cat_spawned == false)
+		//if((timer_dec%time_between_spawns == 0 && timer_dec < 11.2 || (timer_dec%time_between_spawns == 1.6 && 11.2 <= timer_dec && timer_dec< 20 )))
+		if(timer%time_between_spawns == 0 && timer/time_between_spawns == num_of_cats)
+		{
+			if(timer <=5)
+				random_index = Random.Range(0,1);
+			if(timer <=10&&timer>5)
+				random_index = Random.Range(0,2);
+			if(timer <=20&& timer>10)
+				random_index = Random.Range(0,3);
+			if(timer <=30 && timer>20)
+				random_index = Random.Range(0,4);
+			if(timer >30)
+				random_index = Random.Range(0,5);
+
+				Vector3 position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
+				while(Physics.CheckSphere(position, 6))
+				{
+					position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
+				}
+				Instantiate(cat_list[random_index], position, cat_list[random_index].rotation);
+				num_of_cats += 1;
+
 			cat_spawned = true;
 		}
-	
+		
 		/*
 //#if UNITY_EDITOR
 		//================Mouse Clicks================//
@@ -147,7 +165,6 @@ public class GameManager : MonoBehaviour {
 	public void TakeDamage(int amount)
 	{
 		playerHP -= amount;
-		print (playerHP);
 		if (playerHP <= 0) {
 			Application.LoadLevel("LoseScene");
 		}
