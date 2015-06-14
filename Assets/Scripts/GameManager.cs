@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 	public Transform prefab5;
 	private float width;
 	private float height;
-	private int num_of_cats = 1;
+	private int num_of_cats = 0;
 	public float playerHP = 10;
 	public GameObject losebanner;
 	//input
@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour {
 	private List<GameObject> touchList = new List<GameObject>();
 	private GameObject[] touchesOld;
 	private RaycastHit hit;
+	private int i = 0;
+	private float temp_time = 0;
+	private bool cat_spawned = false;
 
 	void Awake(){
 		Screen.orientation = ScreenOrientation.LandscapeLeft;
@@ -40,8 +43,13 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		//=============Cat Spawner===============//
 		time_since_start += Time.deltaTime;
-		int timer = (int)Mathf.Ceil (time_since_start);
+		int timer = (int)Mathf.Floor (time_since_start);
+		float timer_dec = Mathf.Round (time_since_start * 10f) / 10f;
+
 		int index = timer/10;
+		if (index > 4) {
+			index = 4;
+		}
 		float[] spawn_rates = {2.0f,1.6f,1.2f,0.8f,0.4f};
 		int max_num_of_cats = timer;
 		Transform[] cat_list = {prefab1,prefab2,prefab3,prefab4,prefab5};
@@ -51,6 +59,7 @@ public class GameManager : MonoBehaviour {
 		if (timer % time_between_spawns == 0 && timer/time_between_spawns == num_of_cats) 
 		{
 			int random_index = Random.Range(1,index)-1;
+			int random_index = Random.Range(0,index);
 			Vector3 position = new Vector3(Random.Range (-(150/2), 150 / 2), Random.Range (2,80), 50);
 			while(Physics.CheckSphere(position, 6))
 			{
@@ -58,7 +67,9 @@ public class GameManager : MonoBehaviour {
 			}
 			Instantiate(cat_list[random_index], position, cat_list[random_index].rotation);
 			num_of_cats= num_of_cats +1;
+			cat_spawned = true;
 		}
+	
 		/*
 //#if UNITY_EDITOR
 		//================Mouse Clicks================//
